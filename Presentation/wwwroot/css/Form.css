@@ -33,3 +33,9 @@ form {
     color: #635c5c;
     background-color: #cac9c9;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
