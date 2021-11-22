@@ -112,7 +112,7 @@ namespace Presentation.Controllers
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add("hariharant99@gmail.com");
+                mail.To.Add(form.Email);
                 mail.From = new MailAddress("hariharant99@gmail.com");
                 mail.Subject = "Form posted successfully";
                 mail.Body = Request.Form["Thank you for your feed back, Your feedback is posted successfully"];

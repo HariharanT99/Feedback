@@ -441,3 +441,12 @@ function SubmitForm() {
         }
     })
 }
+
+
+//Refresh form
+
+$('#resetbtn').click(function () {
+    console.log("RESET")
+    $('#feedbackform')[0].reset();
+})
+
