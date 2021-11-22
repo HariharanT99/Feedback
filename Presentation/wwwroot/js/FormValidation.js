@@ -433,10 +433,11 @@ function SubmitForm() {
         contentType: false,
         processData: false,
         success: function () {
-            alert("yes");
+            alert("Form Submitted");
+            $(location).prop('href','/Feedback/Index')
         },
         error: function () {
-            alert("No");
+            alert("Form Submission fail");
         }
     })
 }

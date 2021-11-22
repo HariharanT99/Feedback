@@ -102,7 +102,7 @@ namespace Presentation.Controllers
 
             if (result.ToLower() == "success")
             {
-                SendEmail(form);
+                //SendEmail(form);
             }
         }
 

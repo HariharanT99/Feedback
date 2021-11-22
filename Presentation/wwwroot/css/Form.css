@@ -33,6 +33,7 @@ form {
     overflow-y: hidden;
     color: #635c5c;
     background-color: #cac9c9;
+    box-shadow: 3px 5px 10px #373434;
 }
 
 input::-webkit-outer-spin-button,
