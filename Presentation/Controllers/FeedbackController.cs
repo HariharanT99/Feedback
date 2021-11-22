@@ -125,7 +125,7 @@ namespace Presentation.Controllers
 
                 smtp.Send(mail);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
