@@ -27,7 +27,6 @@
                 </div>
                 <div class="col-md-4">
                     <select class="form-select" id="category" aria-label="Default select example">
-
                     </select>
                     <span class="error text-danger" id="cat-error">Category is required</span>
                 </div>
@@ -39,7 +38,7 @@
                 </div>
                 <div class="col-md-4">
                     <select class="form-select" id="product" aria-label="Default select example">
-                        <option selected></option>
+                        <option selected value=""></option>
                     </select>
                     <span class="error text-danger" id="prod-error">Product is required</span>
                 </div>
@@ -89,15 +88,15 @@
                 </div>
                 <div class="col-md-8">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="airconditioner" value="1">
+                        <input class="form-check-input" type="checkbox" name="prod" id="airconditioner" value="Air Conditioner">
                         <label class="form-check-label" for="inlineCheckbox1">Air Conditioner</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="tv" value="2">
+                        <input class="form-check-input" type="checkbox" name="prod" id="tv" value="TV">
                         <label class="form-check-label" for="inlineCheckbox2">TV</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="mobile" value="3">
+                        <input class="form-check-input" type="checkbox" name="prod" id="mobile" value="Mobile">
                         <label class="form-check-label" for="inlineCheckbox2">Mobile</label>
                     </div>
                 </div>
@@ -139,7 +138,7 @@
                     <span class="error text-danger" id="title-error">Tile is required</span>
                 </div>
                 <div class="col-md-6">
-                    <input class="form-control" id="name" placeholder="First *" />
+                    <input class="form-control" id="name" placeholder="First Name *" />
                     <span class="error text-danger" id="name-error">Name is required</span>
                 </div>
                 <div class="col-md-3">

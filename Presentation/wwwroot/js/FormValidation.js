@@ -1,5 +1,7 @@
-﻿$('textarea[name="con"]').prop("disabled", true);
+﻿
+$('textarea[name="con"]').prop("disabled", true);
 
+let formError = true;
 
 //Product Category Validation
 $('#cat-error').hide();
@@ -15,10 +17,12 @@ function validateCategory() {
     if (catValue.length == '') {
         $('#cat-error').show();
         catError = false;
+        formError = false;
     }
     else {
         $('#cat-error').hide();
         catError = true;
+        formError = true;
     }
 }
 
@@ -37,10 +41,12 @@ function validateProduct() {
     if (prodValue.length == '') {
         $('#prod-error').show();
         prodError = false;
+        formError = false;
     }
     else {
         $('#prod-error').hide();
         prodError = true;
+        formError = true;
     }
 }
 
@@ -62,11 +68,12 @@ function validateSatisfactory() {
     if (!isValid) {
         $('#sat-error').show();
         satError = false;
+        formError = false;
     }
     else {
-
         $('#sat-error').hide();
         satError = true;
+        formError = true;
     }
 }
 
@@ -86,10 +93,12 @@ function validatePros() {
     if (pros.length == '') {
         $('#pro-error').show();
         proError = false;
+        formError = false;
     }
     else {
         $('#pro-error').hide();
         proError = true;
+        formError = true;
     }
 }
 
@@ -108,10 +117,12 @@ function validateTitle() {
     if (pros.length == '') {
         $('#title-error').show();
         titleError = false;
+        formError = false;
     }
     else {
         $('#title-error').hide();
         titleError = true;
+        formError = true;
     }
 }
 
@@ -130,17 +141,19 @@ function validateName() {
     if (nameValue.length == '') {
         $('#name-error').show();
         nameError = false;
+        formError = false;
     }
     else if ((nameValue.length < 3) || (nameValue.length > 50)) {
         $('#name-error').show();
         $('#name-error').html
             ("** length of name must be between 3 and 50")
         nameError = false;
-
+        formError = false;
     }
     else {
         $('#name-error').hide();
         nameError = true;
+        formError = true;
     }
 }
 
@@ -159,10 +172,12 @@ function validateInitial() {
     if (initialValue.length == '') {
         $('#initial-error').show();
         initialError = false;
+        formError = false;
     }
     else {
         $('#initial-error').hide();
         initialError = true;
+        formError = true;
     }
 }
 
@@ -182,16 +197,19 @@ function validateEmail() {
     if (Value.length == '') {
         $('#email-error').show();
         emailError = false;
+        formError = false;
     }
     else if (!emailReg.test(Value)) {
         $('#email-error').show();
         $('#email-error').html
             ("** enter valid email")
         emailError = false;
+        formError = false;
     }
     else {
         $('#email-error').hide();
         emailError = true;
+        formError = true;
     }
 }
 
@@ -210,10 +228,12 @@ function validateStreet() {
     if (Value.length == '') {
         $('#street-error').show();
         streetError = false;
+        formError = false;
     }
     else {
         $('#street-error').hide();
         streetError = true;
+        formError = true;
     }
 }
 
@@ -232,10 +252,12 @@ function validateCity() {
     if (Value.length == '') {
         $('#city-error').show();
         cityError = false;
+        formError = false;
     }
     else {
         $('#city-error').hide();
         cityError = true;
+        formError = true;
     }
 }
 
@@ -254,10 +276,12 @@ function validateRegion() {
     if (Value.length == '') {
         $('#reg-error').show();
         regionError = false;
+        formError = false;
     }
     else {
         $('#reg-error').hide();
         regionError = true;
+        formError = true;
     }
 }
 
@@ -276,10 +300,12 @@ function validatePostalCode() {
     if (Value.length == '') {
         $('#zip-error').show();
         postalCodeError = false;
+        formError = false;
     }
     else {
         $('#zip-error').hide();
         postalCodeError = true;
+        formError = true;
     }
 }
 
@@ -298,10 +324,12 @@ function validateCountry() {
     if (Value.length == '') {
         $('#country-error').show();
         countryError = false;
+        formError = false;
     }
     else {
         $('#country-error').hide();
         countryError = true;
+        formError = true;
     }
 }
 
@@ -315,12 +343,17 @@ $('#fileinput').change(function () {
 
 function validateFile() {
     let file = $('#fileinput');
+    console.log(file);
     file = file[0].files[0];
 
     if (file) {
-        if ((file.type.split["/"][1] !== "pdf" || file.type.split["/"][1] !== "png") || (file.size > 500000)) {
+        if (file.type.split("/")[1] !== "pdf" || (file.size > 500000)) {
             $('#file-error').show();
             $('#fileinput').val("");
+            formError = true;
+        }
+        else {
+            formError = true;
         }
     }
 }
@@ -352,5 +385,58 @@ $('#submitbtn').click(function () {
     validateRegion();
     validatePostalCode();
     validateCountry();
+
+    if (formError == true) {
+        SubmitForm();
+    }
 })
 
+
+//Submit form
+
+function SubmitForm() {
+    console.log("submit");
+    var formData = new FormData();
+
+    formData.append("Category", $('#category').val());
+    formData.append("Product", $('#product').val());
+    formData.append("Satisfactory", $('#ratingRadioOptions input[type=radio]:checked').val());
+    var purchased = "";
+    $.each($("input[name='prod']:checked"), function () {
+        purchased += $(this).val() + ',';
+    });
+    console.log("puchase" + purchased);
+    formData.append("PurchasedProducts", purchased);
+    formData.append("Pros", $('#pros').val());
+    formData.append("NameTitle", $('#nametitle').val());
+    formData.append("Name", $('#name').val());
+    formData.append("Initial", $('#initial').val());
+    formData.append("Email", $('#email').val());
+    let street1 = $('#street1').val();
+    let street2 = $('#street2').val();
+    var street = street1 + ',' + street2;
+    formData.append("Street", street);
+    formData.append("City", $('#city').val());
+    formData.append("Region", $('#region').val());
+    formData.append("PoatalCode", $('#postal').val());
+    formData.append("Country", $('#country').val());
+    formData.append("Cons", $('#cons').val());
+    formData.append("File", $("#fileinput")[0].files[0]);
+    console.log("file");
+    console.log($("#fileinput")[0].files[0]);
+    console.log(formData.get('PurchasedProducts'));
+
+    $.ajax({
+        type: "POST",
+        url: "/Feedback/PostForm/",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function () {
+            alert("yes");
+        },
+        error: function () {
+            alert("No");
+        }
+    })
+}
